@@ -114,7 +114,7 @@ elif page == "🧪 Solver":
     with col1:
         T = st.number_input("Temperature (K)", min_value=200.0, max_value=2000.0, value=298.15)
     with col2:
-        P = st.number_input("Pressure (atm)", min_value=0.1, max_value=100.0, value=1.0)
+        P = st.number_input("Pressure (atm)", min_value=0.1, max_value=1000.0, value=1.0)
     
     st.markdown("### Step 3: Enter Initial Moles of Species ⚛️")
     n0 = {}
