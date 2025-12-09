@@ -151,21 +151,43 @@ elif page == "🧪 Solver":
 
 
 # -----------------------------------------------------------------------------------
-# THEORY PAGE
-# -----------------------------------------------------------------------------------
+# --- THEORY PAGE ---
 elif page == "📚 Theory":
     st.title("📚 Thermodynamic Theory")
     st.markdown("""
-## Gibbs Free Energy Minimization ⚖️  
-ΔG = ΔG° + RT ln(Q) = 0 → Q = K
+## Gibbs Free Energy Minimization Condition ⚖️
 
-### Formulas Used:
-ΔH° = Σ(νᵢ ΔHᵢ°)  
-ΔS° = Σ(νᵢ Sᵢ°)  
+At equilibrium, the Gibbs free energy of the system is minimized. The equilibrium condition is:
+
+ΔG = ΔG° + RT ln(Q) = 0
+
+This leads to:
+
+Q = K
+
+The solver numerically adjusts the extent of reaction (ξ) until this condition is satisfied, which is mathematically equivalent to **minimizing the total Gibbs free energy** at constant T and P.
+
+---
+
+### Formulas Used 🔬
+
+**1. Standard Enthalpy Change of Reaction (ΔH°):**  
+ΔH° = Σ(νᵢ ΔHᵢ°)
+
+**2. Standard Entropy Change of Reaction (ΔS°):**  
+ΔS° = Σ(νᵢ Sᵢ°)
+
+**3. Standard Gibbs Free Energy Change (ΔG°):**  
 ΔG° = ΔH° − TΔS°  
+
+**4. Equilibrium Constant (K):**  
 K = exp(−ΔG° / RT)  
+
+**5. Extent of Reaction (ξ):**  
 nᵢ = nᵢ₀ + νᵢ ξ  
-yᵢ = nᵢ / Σnᵢ  
+
+**6. Equilibrium Mole Fraction:**  
+yᵢ = nᵢ / Σ nᵢ
 """)
 
 
