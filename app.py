@@ -114,7 +114,7 @@ elif page == "🧪 Solver":
     with col1:
         T = st.number_input("Temperature (K)", min_value=200.0, max_value=2000.0, value=298.15)
     with col2:
-        P = st.number_input("Pressure (atm)", min_value=0.1, max_value=1000.0, value=1.0)
+        P = st.number_input("Pressure (atm)", min_value=0.1, max_value=100.0, value=1.0)
     
     st.markdown("### Step 3: Enter Initial Moles of Species ⚛️")
     n0 = {}
@@ -128,29 +128,65 @@ elif page == "🧪 Solver":
                 
                 # --- RESULTS DISPLAY ---
                 st.markdown("### ✅ Equilibrium Results")
-                st.markdown(f"<div class='highlight'>Extent of Reaction (ξ): {results['ξ_eq']:.4f} mol ↔️</div>", unsafe_allow_html=True)
+                  results_table = pd.DataFrame({
+        "Property": ["Extent of Reaction (ξ)", "ΔH° (kJ/mol)", "ΔS° (kJ/mol·K)", "ΔG° (kJ/mol)", "K (Equilibrium Constant)"],
+        "Value": [
+            f"{results['ξ_eq']:.4f}",
+            f"{results['ΔH']:.4f}",
+            f"{results['ΔS']:.4f}",
+            f"{results['ΔG']:.4f}",
+            f"{results['K']:.4e}"
+        ]
+    })
+    
+     st.dataframe(
+        results_table.style.set_properties(**{
+            'color': 'white',
+            'background-color': '#0A0F1F',
+            'font-family': 'Poppins',
+            'font-size': '18px',
+            'text-align': 'center'
+        })
+    )
 
-                colH, colS, colG, colK = st.columns(4)
-                colH.markdown(f"<div class='highlight'>ΔH° = {results['ΔH']:.2f} kJ/mol 🔥</div>", unsafe_allow_html=True)
-                colS.markdown(f"<div class='highlight'>ΔS° = {results['ΔS']:.2f} kJ/mol·K ❄️</div>", unsafe_allow_html=True)
-                colG.markdown(f"<div class='highlight'>ΔG° = {results['ΔG']:.2f} kJ/mol ⚡</div>", unsafe_allow_html=True)
-                colK.markdown(f"<div class='highlight'>K = {results['K']:.4e} 📊</div>", unsafe_allow_html=True)
+   # --- Equilibrium Composition Table ---
+    st.markdown("### ⚛️ Equilibrium Composition (Combined Table)")
 
-                st.markdown("### ⚛️ Equilibrium Mole Fractions")
-                eq_df = pd.DataFrame.from_dict(results['y_eq'], orient='index', columns=['Mole Fraction'])
-                eq_df.index.name = 'Species'
+    # Convert equilibrium moles into DataFrame
+    n_eq_df = pd.DataFrame.from_dict(results["n_eq"], orient="index", columns=["Moles"])
+    n_eq_df.index.name = "Species"
+    
+        st.dataframe(
+        combined_df.style.format({
+            "Moles": "{:.4f}",
+            "Mole Fraction": "{:.4f}"
+        }).set_properties(**{
+            'color': 'white',
+            'background-color': '#071A2F',
+            'font-weight': '600',
+            'text-align': 'center',
+            'font-family': 'Poppins',
+            'font-size': '18px'
+        })
+    )
+              if st.checkbox("Show extent expressions for N and yᵢ"):
+        expressions = extent_expressions_for_streamlit(selected_reaction, n0)
 
-                st.markdown('<div class="center-table">', unsafe_allow_html=True)
-                st.dataframe(
-                    eq_df.style.format("{:.4f}")
-                        .set_properties(**{'color': '#00B4D8', 'background-color': '#071A2F',
-                                           'font-weight': '700', 'font-family': 'Poppins', 'text-align': 'center',
-                                           'font-size': '20px'})
-                )
-                st.markdown('</div>', unsafe_allow_html=True)
-            
-            except Exception as e:
-                st.error(f"Error in calculation: {e}")
+        st.markdown("### 📘 Extent of Reaction Expressions (Symbolic)")
+
+        st.write("#### Total Moles Expression:")
+        st.code(expressions["N"])
+
+        st.write("#### Mole Fraction Expressions yᵢ(ξ):")
+        for s, expr in expressions["y_i"].items():
+            st.code(expr)
+
+        st.write("#### Individual Moles Expressions nᵢ(ξ):")
+        for s, expr in expressions["n_i"].items():
+            st.code(expr)
+
+except Exception as e:
+    st.error(f"Error in calculation: {e}")
 
 # --- THEORY PAGE ---
 elif page == "📚 Theory":
