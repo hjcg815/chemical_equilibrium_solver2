@@ -26,7 +26,9 @@ def calculate_reaction_thermo(reaction, T):
 
 
 def solve_equilibrium(reaction, n0, T, P):
-    """Solves ξ using Gibbs Free Energy minimization condition (Q = K)"""
+    """Solves ξ using Gibbs Free Energy minimization condition (Q = K)
+       Also returns total moles and symbolic extent expressions
+    """
 
     species = list(reaction["stoichiometry"].keys())
     nu = np.array([reaction["stoichiometry"][s] for s in species], dtype=float)
@@ -36,18 +38,14 @@ def solve_equilibrium(reaction, n0, T, P):
 
     def equilibrium_function(xi):
         n = n0_arr + nu * xi
-
         if np.any(n < 0):
             return 1e6  # violates physical feasibility
-
         n_tot = np.sum(n)
         y = n / n_tot
-
         Q = 1.0
         for i in range(len(n)):
             if abs(nu[i]) > 0:
                 Q *= (y[i] * P / P0) ** nu[i]
-
         return Q - K
 
     # Numerical root solving (bisection)
@@ -58,11 +56,9 @@ def solve_equilibrium(reaction, n0, T, P):
     for _ in range(500):
         xi_mid = 0.5 * (xi_low + xi_high)
         f_mid = equilibrium_function(xi_mid)
-
         if abs(f_mid) < tol:
             xi = xi_mid
             break
-
         if equilibrium_function(xi_low) * f_mid < 0:
             xi_high = xi_mid
         else:
@@ -70,9 +66,18 @@ def solve_equilibrium(reaction, n0, T, P):
     else:
         xi = xi_mid
 
+    # Equilibrium moles, total moles, mole fractions
     n_eq = n0_arr + nu * xi
-    n_tot = np.sum(n_eq)
-    y_eq = n_eq / n_tot
+    N = np.sum(n_eq)
+    y_eq = n_eq / N
+
+    # --- Symbolic extent expressions ---
+    n_i_expr = {s: f"n_{s}(ξ) = {n0.get(s,0)} + ({reaction['stoichiometry'][s]}) ξ"
+                for s in species}
+    N_expr = " + ".join([f"({n0.get(s,0)} + ({reaction['stoichiometry'][s]}) ξ)" for s in species])
+    N_expr = f"N(ξ) = {N_expr}"
+    y_i_expr = {s: f"y_{s}(ξ) = ({n0.get(s,0)} + ({reaction['stoichiometry'][s]}) ξ) / ({N_expr[6:]})"
+                for s in species}
 
     return {
         "ξ_eq": xi,
@@ -82,5 +87,10 @@ def solve_equilibrium(reaction, n0, T, P):
         "K": K,
         "n_eq": dict(zip(species, n_eq)),
         "y_eq": dict(zip(species, y_eq)),
+        "N": N,
+        "extent_expressions": {
+            "n_i": n_i_expr,
+            "N": N_expr,
+            "y_i": y_i_expr
+        }
     }
-
