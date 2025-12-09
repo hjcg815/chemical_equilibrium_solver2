@@ -51,26 +51,33 @@ page = st.sidebar.radio("Go to", ["🏠 Home", "🧪 Solver", "📚 Theory", "�
 
 
 # -----------------------------------------------------------------------------------
-# HOME PAGE
-# -----------------------------------------------------------------------------------
+# --- HOME PAGE ---
 if page == "🏠 Home":
     st.title("🧪 Chemical Reaction Equilibrium Solver Using Gibbs Free Energy Minimization")
     st.markdown("""
-### Welcome! 🚀  
-This web-based solver analyzes the equilibrium behavior of chemical reactions under specified temperature and pressure conditions.
+### Welcome! 🚀
 
-**Features:**  
-<div class="indent">• 🔬 Select industrial reactions</div>
-<div class="indent">• 🌡️ Input initial moles and conditions</div>
-<div class="indent">• ⚡ Compute thermodynamic properties</div>
+This web-based solver analyzes the equilibrium behavior of chemical reactions under specified temperature and pressure conditions. It uses thermodynamic principles to determine **equilibrium compositions** and **reaction properties**.
 
-**Computes:**  
-<div class="indent">• 🔥 ΔH°</div>
-<div class="indent">• ❄️ ΔS°</div>
-<div class="indent">• ⚡ ΔG°</div>
-<div class="indent">• 📊 K</div>
-<div class="indent">• ↔️ ξ</div>
-<div class="indent">• ⚛️ Mole Fractions</div>
+**Features include:**  
+<div class="indent">• 🔬 Select industrially relevant reactions</div>
+<div class="indent">• 🌡️ Input initial moles and operating conditions</div>
+<div class="indent">• ⚡ Compute thermodynamic properties and equilibrium composition</div>
+
+**Main Capabilities:**  
+<div class="indent">• 📉 Gibbs Free Energy minimization</div>
+<div class="indent">• 🧮 Thermodynamic property evaluation</div>
+<div class="indent">• 🔁 Numerical solution of reaction extent</div>
+
+**The Solver Computes:**  
+<div class="indent">• 🔥 Standard Enthalpy Change (ΔH°)</div>
+<div class="indent">• ❄️ Standard Entropy Change (ΔS°)</div>
+<div class="indent">• ⚡ Standard Gibbs Free Energy Change (ΔG°)</div>
+<div class="indent">• 📊 Equilibrium Constant (K)</div>
+<div class="indent">• ↔️ Extent of Reaction (ξ)</div>
+<div class="indent">• ⚛️ Equilibrium Mole Fractions</div>
+
+All reactions are based on real industrial chemical processes.
 """, unsafe_allow_html=True)
 
 
