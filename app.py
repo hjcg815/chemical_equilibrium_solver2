@@ -116,6 +116,7 @@ elif page == "🧪 Solver":
         with st.spinner("Calculating equilibrium..."):
             try:
                 results = solve_equilibrium(reaction, n0, T, P)
+                species = list(reaction["stoichiometry"].keys())
 
                 st.markdown("### ✅ Equilibrium Results")
 
@@ -139,6 +140,8 @@ elif page == "🧪 Solver":
 
                 st.dataframe(results_table)
 
+               
+                species = list(reaction["stoichiometry"].keys())
                 # Composition Table
                 st.markdown("### ⚛️ Equilibrium Composition")
                 composition_table = pd.DataFrame({
