@@ -149,7 +149,7 @@ elif page == "🧪 Solver":
                     "yᵢ": [f"[results['yᵢ']]"]
                 })
 
-                st.dataframe(equilibrium composition_table)']]"]
+                st.dataframe(composition_table)']]"]
                     "nᵢ (mol)": [f"[results['nᵢ']]"] + [f"[results['N']]"]
                     "yᵢ (ξ)": [f"[results['n_eq']]"]
                     "yᵢ": [f"[results['yᵢ']]"]
