@@ -141,10 +141,15 @@ elif page == "🧪 Solver":
 
                 # Composition Table
                 st.markdown("### ⚛️ Equilibrium Composition")
-                n_eq_df = pd.DataFrame.from_dict(results["n_eq"], orient="index", columns=["Moles"])
-                n_eq_df.index.name = "Species"
+                equilibrium composition_table = pd.DataFrame({
+                    "Species": species + ["Total Moles (N)"],
+                    "nᵢ (ξ)": [f"[results['n_eq']]"]
+                    "nᵢ (mol)": [f"[results['nᵢ']]"] + [f"[results['N']]"]
+                    "yᵢ (ξ)": [f"[results['n_eq']]"]
+                    "yᵢ": [f"[results['yᵢ']]"]
+                })
 
-                st.dataframe(n_eq_df)
+                st.dataframe(equilibrium composition_table)
 
             except Exception as e:
                 st.error(f"Error in calculation: {e}")
