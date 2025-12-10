@@ -67,15 +67,12 @@ def solve_equilibrium(reaction, n0, T, P):
         xi = xi_mid
 
     # Equilibrium moles, total moles, mole fractions
-    # Equilibrium moles, total moles, mole fractions
-    nᵢ = n0_arr + nu * xi
-    N = np.sum(nᵢ)
-    yᵢ = nᵢ / N
-
-    
-    nᵢ (ξ) = [f"{n0[s]} + ({reaction['stoichiometry'][s]})·ξ" for s in species]
-    N = [" + ".join([f"{n0[s]} + ({reaction['stoichiometry'][s]})·ξ" for s in results["nᵢ"].keys()])"]
-    yᵢ (ξ) = [f"({n0[s]} + ({reaction['stoichiometry'][s]})·ξ)/N" for s in results["nᵢ"].keys()]
+    n_eq = n0_arr + nu * xi
+    N = np.sum(n_eq)
+    y_eq = n_eq / N
+    n_eq_xi = [f"{n0[s]} + ({reaction['stoichiometry'][s]})·ξ" for s in species]
+    N = [" + ".join([f"{n0[s]} + ({reaction['stoichiometry'][s]})·ξ" for s in results["n_eq"].keys()])"]
+    y_eq_xi = [f"({n0[s]} + ({reaction['stoichiometry'][s]})·ξ)/N" for s in results["n_eq"].keys()]
 
     return {
         "ξ_eq": xi,
@@ -83,10 +80,10 @@ def solve_equilibrium(reaction, n0, T, P):
         "ΔS": ΔS,
         "ΔG": ΔG,
         "K": K,
-        "nᵢ (ξ)"": dict(zip(species, nᵢ (ξ))),
-        "yᵢ (ξ)"": dict(zip(species, yᵢ (ξ))),
+        "n_eq_xi": dict(zip(species, n_eq_xi)),
+        "y_eq_xi"": dict(zip(species, y_eq_xi)),
         "N": N,
-        "nᵢ: dict(zip(species, yᵢ (ξ))),
-        "yᵢ: dict(zip(species, yᵢ (ξ)))
+        "n_eq": dict(zip(species, n_eq)),
+        "y_eq": dict(zip(species, y_eq))
         }
     }
