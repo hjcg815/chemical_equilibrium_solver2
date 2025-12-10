@@ -143,10 +143,10 @@ elif page == "🧪 Solver":
                 st.markdown("### ⚛️ Equilibrium Composition")
                 composition_table = pd.DataFrame({
                     "Species": species + ["Total Moles (N)"],
-                    "n_eq_xi": [f"[results['nᵢ']]"],
-                    "n_eq": [f"[results['nᵢ']]"] + [f"[results['N']]"],
-                    "y_eq_xi": [f"[results['nᵢ']]"],
-                    "y_eq": [f"[results['yᵢ']]"]
+                    "n_eq_xi": list(results["n_eq_xi"].values()) + [results["N_expr"]],
+                    "n_eq": list(results["n_eq"].values()) + [results["N"]],
+                    "y_eq_xi": list(results["y_eq_xi"].values()) + ["—"],
+                    "y_eq": list(results["y_eq"].values()) + ["—"]
                 })
 
                 st.dataframe(composition_table)
