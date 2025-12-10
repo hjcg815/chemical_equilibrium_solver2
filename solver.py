@@ -72,38 +72,20 @@ def solve_equilibrium(reaction, n0, T, P):
     y_eq = n_eq / N
 
      #Extent reaction expressions
-   n_eq_xi = []
-for s in species:
-    n0_val = n0[s]
-    nu_val = reaction["stoichiometry"][s]
-
-    if nu_val == 0:
-        expr = f"{n0_val}"
-    elif n0_val == 0:
-        expr = f"{nu_val}*xi" if abs(nu_val) != 1 else ("xi" if nu_val > 0 else "-xi")
+    n_eq_xi = [f"{n0[s]} + ({reaction['stoichiometry'][s]})·ξ" for s in species]
+    
+    total_const = sum(n0[s] for s in species)
+    total_xi = sum(reaction['stoichiometry'][s] for s in species)
+    if total_xi == 0:
+        N_expr = f"{total_const}"
+    elif total_xi == 1:
+        N_expr = f"{total_const} + xi"
+    elif total_xi == -1:
+        N_expr = f"{total_const} - xi"
     else:
-        if nu_val == 1:
-            expr = f"{n0_val} + xi"
-        elif nu_val == -1:
-            expr = f"{n0_val} - xi"
-        else:
-            sign = "+" if nu_val > 0 else "-"
-            expr = f"{n0_val} {sign} {abs(nu_val)}*xi"
-    n_eq_xi.append(expr)
-
-# --- Simplified total moles in ξ ---
-total_n0 = sum([n0[s] for s in species])
-total_nu = sum([reaction["stoichiometry"][s] for s in species])
-if total_nu == 0:
-    N_expr = f"{total_n0}"
-elif total_nu == 1:
-    N_expr = f"{total_n0} + xi"
-elif total_nu == -1:
-    N_expr = f"{total_n0} - xi"
-else:
-    sign = "+" if total_nu > 0 else "-"
-    N_expr = f"{total_n0} {sign} {abs(total_nu)}*xi"
-
+        sign = "+" if total_xi > 0 else "-"
+        N_expr = f"{total_const} {sign} {abs(total_xi)}*xi"
+        
     y_eq_xi = [f"({expr})/({N_expr})" for expr in n_eq_xi]
 
     return {
