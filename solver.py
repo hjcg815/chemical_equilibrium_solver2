@@ -69,7 +69,7 @@ def solve_equilibrium(reaction, n0, T, P):
     # Equilibrium moles, total moles, mole fractions
     # Equilibrium moles, total moles, mole fractions
     nᵢ = n0_arr + nu * xi
-    N = np.sum(n_eq)
+    N = np.sum(nᵢ)
     yᵢ = nᵢ / N
 
     
