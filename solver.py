@@ -67,17 +67,15 @@ def solve_equilibrium(reaction, n0, T, P):
         xi = xi_mid
 
     # Equilibrium moles, total moles, mole fractions
-    n_eq = n0_arr + nu * xi
+    # Equilibrium moles, total moles, mole fractions
+    nᵢ = n0_arr + nu * xi
     N = np.sum(n_eq)
-    y_eq = n_eq / N
+    yᵢ = n_eq / N
 
-    # --- Symbolic extent expressions ---
-    n_i_expr = {s: f"n_{s}(ξ) = {n0.get(s,0)} + ({reaction['stoichiometry'][s]}) ξ"
-                for s in species}
-    N_expr = " + ".join([f"({n0.get(s,0)} + ({reaction['stoichiometry'][s]}) ξ)" for s in species])
-    N_expr = f"N(ξ) = {N_expr}"
-    y_i_expr = {s: f"y_{s}(ξ) = ({n0.get(s,0)} + ({reaction['stoichiometry'][s]}) ξ) / ({N_expr[6:]})"
-                for s in species}
+    
+    nᵢ (ξ) = [f"{n0[s]} + ({reaction['stoichiometry'][s]})·ξ" for s in species]
+    N = [" + ".join([f"{n0[s]} + ({reaction['stoichiometry'][s]})·ξ" for s in results["nᵢ"].keys()])"]
+    yᵢ (ξ) = [f"({n0[s]} + ({reaction['stoichiometry'][s]})·ξ)/N" for s in results["nᵢ"].keys()]
 
     return {
         "ξ_eq": xi,
@@ -85,12 +83,10 @@ def solve_equilibrium(reaction, n0, T, P):
         "ΔS": ΔS,
         "ΔG": ΔG,
         "K": K,
-        "n_eq": dict(zip(species, n_eq)),
-        "y_eq": dict(zip(species, y_eq)),
+        "nᵢ (ξ)"": dict(zip(species, nᵢ (ξ))),
+        "yᵢ (ξ)"": dict(zip(species, yᵢ (ξ))),
         "N": N,
-        "extent_expressions": {
-            "n_i": n_i_expr,
-            "N": N_expr,
-            "y_i": y_i_expr
+        "nᵢ: dict(zip(species, yᵢ (ξ))),
+        "yᵢ: dict(zip(species, yᵢ (ξ)))
         }
     }
