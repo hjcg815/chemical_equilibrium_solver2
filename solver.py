@@ -70,7 +70,7 @@ def solve_equilibrium(reaction, n0, T, P):
     # Equilibrium moles, total moles, mole fractions
     nᵢ = n0_arr + nu * xi
     N = np.sum(n_eq)
-    yᵢ = n_eq / N
+    yᵢ = nᵢ / N
 
     
     nᵢ (ξ) = [f"{n0[s]} + ({reaction['stoichiometry'][s]})·ξ" for s in species]
