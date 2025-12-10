@@ -145,7 +145,7 @@ elif page == "🧪 Solver":
                     "Species": species + ["Total Moles (N)"],
                     "Moles (ξ)": list(results["n_eq_xi"].values()) + [results["N_expr"]],
                     "Moles (mol)": [f"{val:.4f}" for val in results["n_eq"].values()] + [f"{results['N']:.4f}"],
-                    "Mole Fraction (ξ)": list(results["y_eq_xi"].values()) + ["—"],
+                    "Mole Fraction (ξ)": list(results["y_eq_xi"].values()) + [""],
                     "Mole Fraction": [f"{val:.4f}" for val in results["y_eq"].values()] + [""]
                 })
 
