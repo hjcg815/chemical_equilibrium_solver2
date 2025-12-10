@@ -71,23 +71,40 @@ def solve_equilibrium(reaction, n0, T, P):
     N = np.sum(n_eq)
     y_eq = n_eq / N
 
-    #Extent reaction expressions
-    n_eq_xi = [f"{n0[s]} + ({reaction['stoichiometry'][s]})·ξ" for s in species]
+     #Extent reaction expressions
+    n0_vals = [n0[s] for s in species]
+    nu_vals = [reaction["stoichiometry"][s] for s in species]
 
-    # N_expr
-    total_n0 = sum(n0_vals)
-total_nu = sum(nu_vals)
-if total_nu == 0:
-    N_expr = f"{total_n0}"
-elif total_nu == 1:
-    N_expr = f"{total_n0} + ξ"
-elif total_nu == -1:
-    N_expr = f"{total_n0} - ξ"
-else:
-    sign = "+" if total_nu > 0 else "-"
-    N_expr = f"{total_n0} {sign} {abs(total_nu)}ξ"
+    n_eq_xi = []
+for n0_val, nu_val in zip(n0_vals, nu_vals):
+    if nu_val == 0:
+        n_eq_xi.append(f"{n0_val}")
+    elif n0_val == 0:
+        n_eq_xi.append(f"{nu_val}ξ" if nu_val != 1 else "ξ")
+    else:
+        if nu_val == 1:
+            n_eq_xi.append(f"{n0_val} + ξ")
+        elif nu_val == -1:
+            n_eq_xi.append(f"{n0_val} - ξ")
+        else:
+            sign = "+" if nu_val > 0 else "-"
+            n_eq_xi.append(f"{n0_val} {sign} {abs(nu_val)}ξ")
 
-    
+    n_eq_xi = []
+for n0_val, nu_val in zip(n0_vals, nu_vals):
+    if nu_val == 0:
+        n_eq_xi.append(f"{n0_val}")
+    elif n0_val == 0:
+        n_eq_xi.append(f"{nu_val}ξ" if nu_val != 1 else "ξ")
+    else:
+        if nu_val == 1:
+            n_eq_xi.append(f"{n0_val} + ξ")
+        elif nu_val == -1:
+            n_eq_xi.append(f"{n0_val} - ξ")
+        else:
+            sign = "+" if nu_val > 0 else "-"
+            n_eq_xi.append(f"{n0_val} {sign} {abs(nu_val)}ξ")
+
     y_eq_xi = [f"({expr})/({N_expr})" for expr in n_eq_xi]
 
     return {
