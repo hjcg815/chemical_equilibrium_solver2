@@ -87,4 +87,3 @@ def solve_equilibrium(reaction, n0, T, P):
         "y_eq_xi": dict(zip(species, y_eq_xi)),
         "N_expr": N_expr
         }
-    }
