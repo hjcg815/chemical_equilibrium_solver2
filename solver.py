@@ -73,7 +73,25 @@ def solve_equilibrium(reaction, n0, T, P):
 
     # Extent reaction expressions
     # Moles
-    n_eq_xi = [f"{n0[s]} + ({reaction['stoichiometry'][s]})·ξ" for s in species]
+    n_eq_xi = []
+for s in species:
+    n0_val = n0[s]
+    nu_val = reaction["stoichiometry"][s]
+
+    # Build string
+    if nu_val == 0:
+        expr = f"{n0_val}"
+    elif n0_val == 0:
+        expr = f"{nu_val}·ξ" if abs(nu_val) != 1 else ("ξ" if nu_val > 0 else "-ξ")
+    else:
+        if nu_val == 1:
+            expr = f"{n0_val} + ξ"
+        elif nu_val == -1:
+            expr = f"{n0_val} - ξ"
+        else:
+            sign = "+" if nu_val > 0 else "-"
+            expr = f"{n0_val} {sign} {abs(nu_val)}·ξ"
+    n_eq_xi.append(expr)
     
     # Total moles
     total_const = sum(n0[s] for s in species)
