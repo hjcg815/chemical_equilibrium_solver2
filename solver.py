@@ -90,7 +90,7 @@ def solve_equilibrium(reaction, n0, T, P):
                 expr = f"{n0_val} - ξ"
             else:
                 sign = "+" if nu_val > 0 else "-"
-                expr = f"{n0_val} {sign} {abs(nu_val)}*ξ"
+                expr = f"{n0_val} {sign} {abs(nu_val)}ξ"
         n_eq_xi.append(expr)
 
     # Total moles
@@ -104,7 +104,7 @@ def solve_equilibrium(reaction, n0, T, P):
         N_expr = f"{total_const} - ξ"
     else:
         sign = "+" if total_nu > 0 else "-"
-        N_expr = f"{total_const} {sign} {abs(total_nu)}·ξ"
+        N_expr = f"{total_const} {sign} {abs(total_nu)}ξ"
         
     #Mole fraction 
     y_eq_xi = [f"({expr})/({N_expr})" for expr in n_eq_xi]
