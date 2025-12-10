@@ -71,21 +71,22 @@ def solve_equilibrium(reaction, n0, T, P):
     N = np.sum(n_eq)
     y_eq = n_eq / N
 
-     #Extent reaction expressions
+    #Extent reaction expressions
+    #Moles
     n_eq_xi = [f"{n0[s]} + ({reaction['stoichiometry'][s]})·ξ" for s in species]
-    
-    total_const = sum(n0[s] for s in species)
+    #Total moles
+        total_const = sum(n0[s] for s in species)
     total_xi = sum(reaction['stoichiometry'][s] for s in species)
     if total_xi == 0:
         N_expr = f"{total_const}"
     elif total_xi == 1:
-        N_expr = f"{total_const} + xi"
+        N_expr = f"{total_const} + ξ"
     elif total_xi == -1:
-        N_expr = f"{total_const} - xi"
+        N_expr = f"{total_const} - ξ"
     else:
         sign = "+" if total_xi > 0 else "-"
-        N_expr = f"{total_const} {sign} {abs(total_xi)}*xi"
-        
+        N_expr = f"{total_const} {sign} {abs(total_xi)}*ξ"
+    #Mole fraction 
     y_eq_xi = [f"({expr})/({N_expr})" for expr in n_eq_xi]
 
     return {
