@@ -74,7 +74,7 @@ def solve_equilibrium(reaction, n0, T, P):
     #Extent reaction expressions
     n_eq_xi = [f"{n0[s]} + ({reaction['stoichiometry'][s]})·ξ" for s in species]
     N_expr = " + ".join(n_eq_xi)
-    y_eq_xi = [f"({expr})/({results['N_expr']})" for expr in n_eq_xi]
+    y_eq_xi = [f"({expr})/({N_expr})" for expr in n_eq_xi]
 
     return {
         "ξ_eq": xi,
