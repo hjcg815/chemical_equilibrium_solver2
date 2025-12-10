@@ -73,7 +73,21 @@ def solve_equilibrium(reaction, n0, T, P):
 
     #Extent reaction expressions
     n_eq_xi = [f"{n0[s]} + ({reaction['stoichiometry'][s]})·ξ" for s in species]
-    N_expr = " + ".join(n_eq_xi)
+
+    # N_expr
+    total_n0 = sum(n0_vals)
+total_nu = sum(nu_vals)
+if total_nu == 0:
+    N_expr = f"{total_n0}"
+elif total_nu == 1:
+    N_expr = f"{total_n0} + ξ"
+elif total_nu == -1:
+    N_expr = f"{total_n0} - ξ"
+else:
+    sign = "+" if total_nu > 0 else "-"
+    N_expr = f"{total_n0} {sign} {abs(total_nu)}ξ"
+
+    
     y_eq_xi = [f"({expr})/({N_expr})" for expr in n_eq_xi]
 
     return {
