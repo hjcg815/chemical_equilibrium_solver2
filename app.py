@@ -224,7 +224,7 @@ elif page == "ℹ️ About":
 **University:** Batangas State University – TNEU  
 
 ### Data Source
-• Lange’s Handbook of Chemistry, 12th Edition 
+• Lange’s Handbook of Chemistry, 12th Edition
 • Perry’s Chemical Engineers’ Handbook, 9th Edition
 
 ### Software Used
