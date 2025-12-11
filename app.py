@@ -62,12 +62,12 @@ This web-based solver analyzes the equilibrium behavior of chemical reactions un
 **Features include:**  
 <div class="indent">• 🔬 Select industrially relevant reactions</div>
 <div class="indent">• 🌡️ Input initial moles and operating conditions</div>
-<div class="indent">• ⚡ Compute thermodynamic properties and equilibrium composition</div>  
-
+<div class="indent">• ⚡ Compute thermodynamic properties and equilibrium composition</div>
+<br>
 **Main Capabilities:**  
 <div class="indent">• 📉 Gibbs Free Energy minimization</div>
 <div class="indent">• 🧮 Thermodynamic property evaluation</div>
-<div class="indent">• 🔁 Numerical solution of reaction extent</div>  
+<div class="indent">• 🔁 Numerical solution of reaction extent</div>
 
 **The Solver Computes:**  
 <div class="indent">• 🔥 Standard Enthalpy Change (ΔH°)</div>
@@ -75,7 +75,7 @@ This web-based solver analyzes the equilibrium behavior of chemical reactions un
 <div class="indent">• ⚡ Standard Gibbs Free Energy Change (ΔG°)</div>
 <div class="indent">• 📊 Equilibrium Constant (K)</div>
 <div class="indent">• ↔️ Extent of Reaction (ξ)</div>
-<div class="indent">• ⚛️ Equilibrium Mole Fractions</div>  
+<div class="indent">• ⚛️ Equilibrium Mole Fractions</div>
 
 All reactions are based on real industrial chemical processes.
 """, unsafe_allow_html=True)
