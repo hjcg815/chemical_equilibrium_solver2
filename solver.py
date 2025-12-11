@@ -26,6 +26,9 @@ def calculate_reaction_thermo(reaction, T):
 
 
 def solve_equilibrium(reaction, n0, T, P):
+     # Convert atm → bar
+    P = P * 1.01325
+    
     """Solves ξ using Gibbs Free Energy minimization condition (Q = K)
        Also returns total moles and symbolic extent expressions
     """
