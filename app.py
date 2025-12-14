@@ -49,13 +49,14 @@ h3 { font-size: 28px; }
 st.sidebar.title("🧭 Navigation")
 page = st.sidebar.radio("Go to", ["🏠 Home", "🧪 Solver", "📚 Theory", "📖 Reaction Database", "ℹ️ About"])
 
-if "last_page" not in st.session_state:
-    st.session_state.last_page = None
+
+if "page" not in st.session_state:
+    st.session_state.page = "🏠 Home"
 
 
-if st.session_state.last_page != page:
-    st.scroll_to(0)  # only works in Streamlit >=1.25
-st.session_state.last_page = page
+if page != st.session_state.page:
+    st.session_state.page = page
+    st.experimental_rerun()
 
 
 # -----------------------------------------------------------------------------------
