@@ -51,6 +51,7 @@ page = st.sidebar.radio("Go to", ["🏠 Home", "🧪 Solver", "📚 Theory", "�
 
 
 st.markdown("<script>window.scrollTo(0, 0);</script>", unsafe_allow_html=True)
+
 # -----------------------------------------------------------------------------------
 # --- HOME PAGE ---
 if page == "🏠 Home":
