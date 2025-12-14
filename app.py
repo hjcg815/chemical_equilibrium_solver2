@@ -50,6 +50,7 @@ st.sidebar.title("🧭 Navigation")
 page = st.sidebar.radio("Go to", ["🏠 Home", "🧪 Solver", "📚 Theory", "📖 Reaction Database", "ℹ️ About"])
 
 
+st.markdown("<script>window.scrollTo(0, 0);</script>", unsafe_allow_html=True)
 # -----------------------------------------------------------------------------------
 # --- HOME PAGE ---
 if page == "🏠 Home":
