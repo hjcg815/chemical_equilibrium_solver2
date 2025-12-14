@@ -50,15 +50,6 @@ st.sidebar.title("🧭 Navigation")
 page = st.sidebar.radio("Go to", ["🏠 Home", "🧪 Solver", "📚 Theory", "📖 Reaction Database", "ℹ️ About"])
 
 
-if "page" not in st.session_state:
-    st.session_state.page = "🏠 Home"
-
-
-if page != st.session_state.page:
-    st.session_state.page = page
-    st.experimental_rerun()
-
-
 # -----------------------------------------------------------------------------------
 # --- HOME PAGE ---
 if page == "🏠 Home":
