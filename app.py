@@ -221,7 +221,7 @@ elif page == "📖 Reaction Database":
 elif page == "ℹ️ About":
     st.title("ℹ️ About This Project")
     st.markdown("""
-**Developed by:** GROUP 3 — CHE 3105  
+**Developed by:** GROUP 3 — CHE 3107  
 **Course:** ChE 408 – Solution Thermodynamics  
 **University:** Batangas State University – TNEU  
 **Leader:** GARCIA, HONEYZ JAMILLE C.  
