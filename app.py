@@ -222,31 +222,33 @@ elif page == "ℹ️ About":
     st.title("ℹ️ About This Project")
     st.markdown("""
 **Developed by:** GROUP 3 — CHE 3105  
-**Course:** ChE 408 – Solution Thermodynamics
-**University:** Batangas State University – TNEU
-**Leader:** GARCIA, HONEYZ JAMILLE C.
-**Coders:** GARCIA, HONEYZ JAMILLE C.
-            ILAGAN, ROANNE
-**Members:**
-    BRINAS, HENRY JOSEPH 
-    CARTEL, AUBREY D. 
-    DELA CRUZ, IRENE
-    ILAGAN, ROANNE
-    MARANAN, LORIE JANE 
-    MORALES, ARABELLA GRACE M.
-    SALANGUIT, JHONA
+**Course:** ChE 408 – Solution Thermodynamics  
+**University:** Batangas State University – TNEU  
+**Leader:** GARCIA, HONEYZ JAMILLE C.  
 
+**Coders:**  
+- GARCIA, HONEYZ JAMILLE C.  
+- ILAGAN, ROANNE  
+
+**Members:**  
+- BRINAS, HENRY JOSEPH  
+- CARTEL, AUBREY D.  
+- DELA CRUZ, IRENE  
+- ILAGAN, ROANNE  
+- MARANAN, LORIE JANE  
+- MORALES, ARABELLA GRACE M.  
+- SALANGUIT, JHONA  
 
 ### Data Source
-• Lange’s Handbook of Chemistry, 12th Edition  
-• Perry’s Chemical Engineers’ Handbook, 9th Edition
+- Lange’s Handbook of Chemistry, 12th Edition  
+- Perry’s Chemical Engineers’ Handbook, 9th Edition
 
 ### Software Used
-• Python  
-• NumPy  
-• Streamlit  
+- Python  
+- NumPy  
+- Streamlit  
 
 ### Computational Method
-• Gibbs Free Energy Minimization  
+- Gibbs Free Energy Minimization  
 """)
 
